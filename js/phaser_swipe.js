@@ -32,6 +32,7 @@ function Swipe(game, model) {
 
 Swipe.prototype.setupKeyboard = function () {
   var self = this;
+  // 对应的code在main中
   var up = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
   up.onDown.add(function () {
     if (self.tmpDirection !== null) {

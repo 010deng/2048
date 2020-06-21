@@ -1,17 +1,12 @@
+// 以canvas的模式创建游戏场景
+// 第四个参数是DOM的id
 var game = new Phaser.Game(240, 400, Phaser.CANVAS, "game");
 
+// 对应Phaser.Game中的state参数，在最后的时候会通过add方法添加
 game.States = {};
 
 game.States.boot = function () {
   this.preload = function () {
-    if (typeof GAME !== "undefined") {
-      this.load.baseURL = GAME + "/";
-    }
-    if (!game.device.desktop) {
-      this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-      this.scale.forcePortrait = true;
-      this.scale.refresh();
-    }
     game.load.image("loading", "assets/preloader.gif");
   };
   this.create = function () {
@@ -21,8 +16,10 @@ game.States.boot = function () {
 
 game.States.preload = function () {
   this.preload = function () {
+    // 上面加载这里展示
     var preloadSprite = game.add.sprite(10, game.height / 2, "loading");
     game.load.setPreloadSprite(preloadSprite);
+    // 注意这里是加载不是显示
     game.load.image("background", "assets/bg.png");
     game.load.image("btnStart", "assets/btn-start.png");
     game.load.image("btnRestart", "assets/btn-restart.png");
@@ -36,7 +33,7 @@ game.States.preload = function () {
 
 game.States.main = function () {
   this.create = function () {
-    // 背景
+    // 背景 -- 赋予了物理属性要使用Sprite
     game.add.tileSprite(0, 0, game.width, game.height, "background");
     // logo
     var logo = game.add.image(0, 0, "logo");
@@ -44,6 +41,7 @@ game.States.main = function () {
       (game.width - logo.width) / 2,
       (game.height - logo.height) / 2 - 50
     );
+    // 点击的时候调用 this.startGame
     var startBtn = game.add.button(0, 0, "btnStart", this.startGame, this);
     startBtn.reset(
       (game.width - startBtn.width) / 2,
@@ -60,7 +58,8 @@ game.States.start = function () {
     // 背景
     game.add.tileSprite(0, 0, game.width, game.height, "background");
     this.score = 0;
-    this.best = 0;
+    // 最佳成绩从 localstorage 中取
+    this.best = localStorage.getItem("best");
     var titleStyle = {
       font: "bold 12px Arial",
       fill: "#4DB3B3",
@@ -110,7 +109,7 @@ game.States.start = function () {
     // mainarea
     var mainAreaSprite = game.add.sprite(10, 80);
     var mainAreaBackGraphics = game.add.graphics(0, 0);
-    mainAreaBackGraphics.beginFill(0xada79a, 0.5);
+    mainAreaBackGraphics.beginFill(0xbbada0, 1);
     mainAreaBackGraphics.drawRoundedRect(0, 0, 220, 220, 10);
     mainAreaBackGraphics.endFill();
     mainAreaSprite.addChild(mainAreaBackGraphics);
@@ -145,6 +144,7 @@ game.States.start = function () {
     if (this.array) {
       for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 4; j++) {
+          // 清空所有的现有对象
           if (this.array[i][j].sprite) {
             this.array[i][j].sprite.kill();
           }
@@ -241,6 +241,7 @@ game.States.start = function () {
       if (this.score > this.best) {
         this.best = this.score;
         this.bestText.text = this.best;
+        localStorage.setItem("best", this.best);
       }
       // 渐渐透明后被kill掉
       var t1 = game.add
@@ -494,6 +495,7 @@ game.States.start = function () {
   };
 };
 
+// 串行控制
 game.state.add("boot", game.States.boot);
 game.state.add("preload", game.States.preload);
 game.state.add("main", game.States.main);

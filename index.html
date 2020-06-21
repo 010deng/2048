@@ -1,24 +1,47 @@
-<!DOCTYPE html> 
-<head> 
-	<meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-	<title>2048</title>
-    <script src="./phaser.min.js"></script>
-    <script src="js/phaser_swipe.js"></script>
-    <script src="js/main.js"></script>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-      .game {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-      }
-    </style>
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <title>2048</title>
+  <script src="./phaser.min.js"></script>
+  <script src="js/phaser_swipe.js"></script>
+  <script src="js/main.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      margin: 0;
+      background: #faf8ef;
+      color: #776e65;
+      font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .game {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .info {
+      padding: 60px;
+      font-size: 18px;
+    }
+
+    .t_bold {
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
+  <!-- 游戏规则 -->
+  <div class="info">
+    <p class="t_bold">游戏规则</p>
+    <p>本游戏支持两种交互方式（键盘 && 鼠标）</p>
+    <p>Use your <span class="t_bold">arrow keys（mouse drag）</span> to move the tiles. When two tiles with the <span class="t_bold">same</span> number touch, they merge into one!</p>
+  </div>
   <div id="game" class="game"></div>
 </body>
