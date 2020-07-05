@@ -5,6 +5,8 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <title>2048</title>
+  <script src="node_modules/art-dialog/lib/jquery-1.10.2.js"></script>
+  <script src="node_modules/art-dialog/dist/dialog.js"></script>
   <script src="./phaser.min.js"></script>
   <script src="js/phaser_swipe.js"></script>
   <script src="js/main.js"></script>
@@ -26,8 +28,10 @@
     }
 
     .info {
-      padding: 60px;
+      display: inline-block;
+      margin: 80px;
       font-size: 18px;
+      cursor: pointer;
     }
 
     .t_bold {
@@ -38,11 +42,21 @@
 
 <body>
   <!-- 游戏规则 -->
-  <div class="info">
-    <p class="t_bold">游戏规则</p>
-    <p>Use your <span class="t_bold">arrow keys（mouse drag）</span> to move the tiles. </p>
-    <p>When two tiles with the <span class="t_bold">same</span> number touch, they merge into one!</p>
+  <div id="help" class="info" onclick="showDialog(true)">
+    帮助
   </div>
   <!-- 游戏承载主体 -->
   <div id="game" class="game"></div>
+
+  <script>
+    function showDialog(isShow) {
+      var d = dialog({
+        title: '游戏规则',
+        content: '玩家每次可以选择上下左右其中一个方向去移动，每移动一次，所有的数字方块都会往移动的方向靠拢外，系统也会在空白的地方随机出现一个数字方块，相同数字的方块在靠拢、相撞时会相加。系统给予的数字方块不是2就是4，玩家要想办法在这小小的16格范围中凑出“2048” 这个数字方块。'
+      }).width(400);
+      isShow ? d.show(document.getElementById('help')) : d.close().remove()
+    }
+
+
+  </script>
 </body>

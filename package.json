@@ -1,0 +1,24 @@
+{
+	"name": "2048",
+	"version": "1.0.0",
+	"description": "H5小游戏",
+	"main": "jquery.min.js",
+	"dependencies": {},
+	"devDependencies": {
+		"art-dialog": "^7.0.0"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/010deng/2048.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/010deng/2048/issues"
+	},
+	"homepage": "https://github.com/010deng/2048#readme"
+}

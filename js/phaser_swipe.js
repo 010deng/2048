@@ -1,6 +1,8 @@
+// 封装了交互逻辑
 function Swipe(game, model) {
 	var self = this;
 
+	// 方向常量
 	self.DIRECTION_UP = 1;
 	self.DIRECTION_DOWN = 2;
 	self.DIRECTION_LEFT = 4;
