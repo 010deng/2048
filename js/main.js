@@ -219,7 +219,7 @@ game.States.start = function() {
 	this.swipeCommon = function(i, j, arrNode, posJson, condition, nextArrNode, nextPosJson) {
 		var that = this;
 		var duration = 100;
-		// 遇到了可以合并的
+		//	不是新产生的节点，并且碰撞的两个节点value相同
 		if (!arrNode.newNode && arrNode.value == this.array[i][j].value) {
 			arrNode.value = arrNode.value * 2;
 			arrNode.newNode = true;
@@ -304,6 +304,7 @@ game.States.start = function() {
 		for (var i = 1; i < this.array.length; i++) {
 			for (var j = 0; j < this.array.length; j++) {
 				if (this.array[i][j].value != 0) {
+					// 上面赋值
 					var index = i - 1;
 					while (index > 0 && this.array[index][j].value == 0) {
 						index--;
